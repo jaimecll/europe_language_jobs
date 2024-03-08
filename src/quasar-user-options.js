@@ -11,8 +11,8 @@ export default {
         'QCarouselSlide',
         'QCarouselControl'
       ],
+      plugins: ['Notify']
     }
   },
-  plugins: {
-  }
+  
 }

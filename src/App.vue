@@ -9,34 +9,54 @@
             </q-avatar>
   
             <q-toolbar-title></q-toolbar-title>
-            <q-btn flat dense class="q-btn inline relative-position q-btn-item non-selectable q-py-sm q-px-md q-btn-rectangle q-btn-flat q-focusable q-hoverable q-btn-no-uppercase q-btn-dense">Maquetación</q-btn>
-            <q-btn flat dense class="q-btn inline relative-position q-btn-item non-selectable q-py-sm q-px-md q-btn-rectangle q-btn-flat q-focusable q-hoverable q-btn-no-uppercase q-btn-dense">Datos</q-btn>
-            <q-btn flat dense class="q-btn inline relative-position q-btn-item non-selectable q-py-sm q-px-md q-btn-rectangle q-btn-flat q-focusable q-hoverable q-btn-no-uppercase q-btn-dense">Formulario</q-btn>
+            <router-link to="/">
+              <q-btn flat dense @click="changeView(1)" class="inline relative-position q-btn-item non-selectable q-py-sm q-px-md q-btn-rectangle q-btn-flat q-focusable q-hoverable q-btn-no-uppercase q-btn-dense">Maquetación</q-btn>
+            </router-link>
+            <router-link to="/form">
+              <q-btn flat dense @click="changeView(2)" class="inline relative-position q-btn-item non-selectable q-py-sm q-px-md q-btn-rectangle q-btn-flat q-focusable q-hoverable q-btn-no-uppercase q-btn-dense">Datos</q-btn>
+            </router-link>
             
           </q-toolbar>
         </q-header>
     <q-page-container>
-      <Maquetacion />
+     <!-- Router view no logro hacer que funcione, codigo poco optimo -->
+        <router-view></router-view>
+        <Maquetacion v-if="view==1" />
+        <Form v-if="view==2"/>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
 import { ref } from 'vue'
-import Maquetacion from './components/Maquetacion.vue'
+
+import Maquetacion from './components/Maquetacion.vue';
+import Form from './components/FormPerros.vue';
+
 
 export default {
-  name: 'LayoutDefault',
+  name: 'App',
 
   components: {
-    Maquetacion
+    Maquetacion,
+    Form
   },
 
   setup () {
     return {
-      leftDrawerOpen: ref(false)
+      leftDrawerOpen: ref(false),
     }
-  }
+  },
+  data(){
+    return{
+      view:1,
+    }
+  },
+  methods: {
+    changeView(views){
+      this.view=views;
+    }
+  },
 }
 </script>
 <style scoped src="./assets/css/maquetacion.css"></style>
